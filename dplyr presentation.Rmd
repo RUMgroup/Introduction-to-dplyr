@@ -1,0 +1,106 @@
+---
+title: "An introduction to dplyr"
+author: "Heather Robinson"
+date: "2 July 2017"
+output: ioslides_presentation
+---
+
+##An introduction to simplifying code with dplyr {.flexbox .vcenter}
+![](C:/Users/mqbpjhr4/Pictures/dplyr.jpg)
+
+
+
+Heather.robinson-2@manchester.ac.uk
+
+## Tidyverse release timeline
+![](C:/Users/mqbpjhr4/Pictures/timeline.jpg)
+*Dan Kopf, Priceonomics*
+
+##Large database challenges{.flexbox .vcenter}
+```{r, echo=FALSE,message=FALSE}
+library(dplyr)
+alldata<-read.table("creatininetests.csv",sep=",",header=TRUE)
+```
+```{r, message=FALSE}
+head(alldata)
+```
+
+"A matrix has rows and columns. A data frame has observations and variables."-*Hadley Wickham*
+
+<span style="color:red">dplyr provides an alternative, simplified syntax for data manipulation that is fast and intuitive</span>
+
+##Speed and ease of use
+```{r}
+a1 <- filter(alldata, location == "GP", time >= 5)
+a2 <- select(a1, creatinine, time, location, AKI1)
+a3 <- arrange(a2, time, creatinine)
+head(a3)
+```
+###FILTER VS SUBSET
+```{r}
+a1 <- alldata[alldata$location == "GP" & alldata$time >= 5,]
+a1 <- subset(alldata,alldata$location == "GP" & alldata$time >= 5)
+```
+
+## KEY FUNCTIONS 
+Mutate creates new derived columns
+```{r,message==FALSE}
+mutate(a3, logcrea = log10(creatinine))
+```
+Slice removes unwanted rows by row number or condition
+```{r,message=FALSE}
+a4<-slice(a3,which(!duplicated(creatinine)))
+```
+
+## PIPE (based on magrittr)
+```{r}
+a3 <- alldata %>%
+  filter(location == "GP", time >= 5) %>%
+  select(creatinine, time, location, AKI1) %>%
+  arrange(time, creatinine)
+```
+dplyr, no pipe
+```{r}
+a1 <- filter(alldata, location == "GP", time >= 5)
+a2 <- select(a1, creatinine, time, location, AKI1)
+a3 <- arrange(a2, time, creatinine)
+```
+Base R
+```{r}
+a1 <- alldata[alldata$location == "GP" & alldata$time >= 5,]
+a2 <- a1[c("a1$creatinine","a1$time","a1$location","a1$AKI1"),]
+a3 <- a2[order(a2$time, a2$creatinine),]
+```
+##Database back ends
+Capabilities to interface with large server based data stores by transforming R code into SQL.
+e.g.
+```{r,eval=FALSE}
+bikes <- src_mysql (
+  dbname = 'national_bike_database',
+  host = 'HOST',
+  port = 5432,
+  user = 'username',
+  password = 'password')
+```
+
+```{r,eval=FALSE}
+  src_tbls(bikes)
+  rentals <- tbl(bikes, "rentals")
+```
+
+```{r,eval=FALSE} 
+  just_rentals <- rentals %>%
+    filter(!is.na(price) %>%
+    filter(year==2002|year==2003) %>%
+    collect ()
+    ```  
+##Recommended
+-http://spark.rstudio.com/dplyr.html
+
+-https://www.r-bloggers.com/data-manipulation-with-dplyr/
+
+-https://www.rstudio.com/resources/webinars/working-with-big-data-in-r/
+
+-package sparklyr: R interface to Apache Spark
+  
+-package sqldf: allows SQL code queries in R
