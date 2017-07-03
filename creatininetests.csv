@@ -1,0 +1,19 @@
+creatinine,time,location,AKI1,AKI2
+45,2,GP,Normal test,Normal test
+50,5,GP,Normal test,Normal test
+72,8,GP,Normal test,Normal test
+60,9,GP,Normal test,Normal test
+160,12,Hospital,AKI indicating test,Normal test
+120,13,Hospital,Within episode test,Normal test
+80,33,Hospital,Within episode test,Normal test
+60,37,Hospital,Within episode test,Normal test
+72,50,GP,Normal test,Normal test
+135,79,GP,AKI indicating test,Normal test
+150,92,Hospital,Within episode test,AKI indicating test
+120,94,Hospital,Within episode test,Within episode test
+90,99,Hospital,Within episode test,Within episode test
+80,102,Hospital,Normal test,Normal test
+60,115,GP,Normal test,Normal test
+72,130,GP,Normal test,Normal test
+135,160,GP,AKI indicating test,Normal test
+140,180,Hospital,Within episode test,Normal test
