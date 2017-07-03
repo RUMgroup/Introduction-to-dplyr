@@ -160,9 +160,49 @@ a1 &lt;- subset(alldata,alldata$location == &quot;GP&quot; &amp; alldata$time &g
 ## 7         72  130       GP         Normal test 1.857332
 ## 8        135  160       GP AKI indicating test 2.130334</pre>
 
+</article></slide><slide class=''><hgroup><h2>KEY FUNCTIONS</h2></hgroup><article  id="key-functions-1">
+
 <p>Slice removes unwanted rows by row number or condition</p>
 
-<pre class = 'prettyprint lang-r'>a4&lt;-slice(a3,which(!duplicated(creatinine)))</pre>
+<pre class = 'prettyprint lang-r'>slice(a3,which(!duplicated(creatinine)))</pre>
+
+<pre >##   creatinine time location                AKI1
+## 1         50    5       GP         Normal test
+## 2         72    8       GP         Normal test
+## 3         60    9       GP         Normal test
+## 4        135   79       GP AKI indicating test</pre>
+
+</article></slide><slide class=''><hgroup><h2>KEY FUNCTIONS</h2></hgroup><article  id="key-functions-2">
+
+<p>Arrange reorders by column values</p>
+
+<pre class = 'prettyprint lang-r'>arrange(a3, desc(creatinine))</pre>
+
+<pre >##   creatinine time location                AKI1
+## 1        135   79       GP AKI indicating test
+## 2        135  160       GP AKI indicating test
+## 3         72    8       GP         Normal test
+## 4         72   50       GP         Normal test
+## 5         72  130       GP         Normal test
+## 6         60    9       GP         Normal test
+## 7         60  115       GP         Normal test
+## 8         50    5       GP         Normal test</pre>
+
+</article></slide><slide class=''><hgroup><h2>KEY FUNCTIONS</h2></hgroup><article  id="key-functions-3">
+
+<p>Select simultaneously reorders and subsets by column</p>
+
+<pre class = 'prettyprint lang-r'>select(a3,time,AKI1,creatinine)</pre>
+
+<pre >##   time                AKI1 creatinine
+## 1    5         Normal test         50
+## 2    8         Normal test         72
+## 3    9         Normal test         60
+## 4   50         Normal test         72
+## 5   79 AKI indicating test        135
+## 6  115         Normal test         60
+## 7  130         Normal test         72
+## 8  160 AKI indicating test        135</pre>
 
 </article></slide><slide class=''><hgroup><h2>PIPE (based on magrittr)</h2></hgroup><article  id="pipe-based-on-magrittr">
 

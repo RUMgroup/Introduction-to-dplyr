@@ -47,9 +47,25 @@ Mutate creates new derived columns
 ```{r,message==FALSE}
 mutate(a3, logcrea = log10(creatinine))
 ```
+
+## KEY FUNCTIONS 
+
 Slice removes unwanted rows by row number or condition
 ```{r,message=FALSE}
-a4<-slice(a3,which(!duplicated(creatinine)))
+slice(a3,which(!duplicated(creatinine)))
+```
+
+## KEY FUNCTIONS 
+Arrange reorders by column values
+```{r,message=FALSE}
+arrange(a3, desc(creatinine))
+```
+
+## KEY FUNCTIONS 
+
+Select simultaneously reorders and subsets by column
+```{r,message=FALSE}
+select(a3,time,AKI1,creatinine)
 ```
 
 ## PIPE (based on magrittr)
