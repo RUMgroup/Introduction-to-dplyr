@@ -72,7 +72,7 @@ a2 <- a1[c("a1$creatinine","a1$time","a1$location","a1$AKI1"),]
 a3 <- a2[order(a2$time, a2$creatinine),]
 ```
 ##Database back ends
-Capabilities to interface with large server based data stores by transforming R code into SQL.
+Capabilities to interface with large server based data stores and query using R code.
 e.g.
 ```{r,eval=FALSE}
 bikes <- src_mysql (
